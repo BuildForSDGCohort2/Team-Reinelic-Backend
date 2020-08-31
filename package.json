@@ -1,0 +1,32 @@
+{
+  "name": "team-reinelic-backend",
+  "version": "1.0.0",
+  "description": "Backend for Parenting-Together Project App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "@powershell $env:DEBUG='server,-express:router*' ; nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BuildForSDGCohort2/Team-Reinelic-Backend.git"
+  },
+  "author": "Reine Alice",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BuildForSDGCohort2/Team-Reinelic-Backend/issues"
+  },
+  "homepage": "https://github.com/BuildForSDGCohort2/Team-Reinelic-Backend#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "chalk": "^4.1.0",
+    "config": "^3.3.1",
+    "debug": "4.1.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.2",
+    "morgan": "^1.10.0",
+    "request": "^2.88.2"
+  }
+}
