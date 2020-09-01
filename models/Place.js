@@ -21,7 +21,7 @@ const placeSchema = new mongoose.Schema({
     },
     contact:{
         type:Number
-    },
+    }, 
 
     reviews:[{
         user:{
