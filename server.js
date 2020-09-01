@@ -14,20 +14,25 @@ const app = express();
 
 connectDB();
 
-//MIDDLEWARE 
+//MIDDLEWARES 
 
 app.use(morgan('tiny'));
+app.use(express.json({extended:false}));
 
 
 
 
 //ROUTES
 
-app.get("/", (req, res) => res.send(" Hello Parents"));
 
 
+app.use('/api/user', require('./api/users'));
+app.use('/api/activity', require('./api/activities'));
+app.use('/api/place', require('./api/places'));
+app.use('/api/profile', require('./api/profiles'));
+app.use('/api/report', require('./api/reports'));
+app.use('/api/auth', require('./api/auth'));
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => debug(`App is listening to  ${chalk.red(PORT)}`));
-
