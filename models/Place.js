@@ -6,8 +6,8 @@ const placeSchema = new mongoose.Schema({
     name: {
         type: String
     },
-    category:{
-        type:string
+    category: {
+        type: String
     },
     badge: {
         type: String
@@ -19,18 +19,23 @@ const placeSchema = new mongoose.Schema({
 
         type: String,
     },
-    contact:{
-        type:Number
-    }, 
+    contact: {
+        type: Number
+    },
 
-    reviews:[{
-        user:{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:'user'
+    reviews: [{
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'user'
+        },
+         
+        review_text :{
+            type:String
         }
+        
     }]
 })
 
-const Place = mongoose.model('place', PlaceSchema);
+const Place = mongoose.model('place', placeSchema);
 
 module.exports = Place;
