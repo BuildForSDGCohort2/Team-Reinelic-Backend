@@ -13,6 +13,12 @@ const profileSchema = new mongoose.Schema({
         type: String
     },
     children: [{
+        user:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'user'
+
+        },
+        
         name: {
             type: String
         },
@@ -22,16 +28,12 @@ const profileSchema = new mongoose.Schema({
         contact: {
             type: Number
         },
-        education: {
-            school: {
-                name: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: 'place'
-                }
-            },
-
-        }
-    }],
+    
+        school:{
+            type:String
+        }}
+        
+    ],
     work: {
         type: String,
         required: true
