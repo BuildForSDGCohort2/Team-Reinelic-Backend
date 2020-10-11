@@ -1,5 +1,5 @@
 import React ,{Fragment,useState} from 'react';
-import {Link,withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {createProfile} from '../../actions/profile';
@@ -23,7 +23,7 @@ import {createProfile} from '../../actions/profile';
         }
     );
   
-    const {name, category, work, address,contact,childNum} = formData;
+    const {name, category, work, address,contact} = formData;
    
 
     const[childrenData, setChildren] = useState(
@@ -172,11 +172,11 @@ import {createProfile} from '../../actions/profile';
                            </div>
                             <div className="form-group">
                             <div className="form-label" >Children Age</div>
-                            <input type="text" data-id={index} name ="child_age" value={childrenData.child_age} data ={index} onChange = {e =>onChangeChild(e)}/>
+                            <input type="text" data-id={index} name ="child_age" value={childrenData.child_age} data-id ={index} onChange = {e =>onChangeChild(e)}/>
                            </div>
                            <div className="form-group">
                             <div className="form-label" > Children School</div>
-                            <input type="text"  data-id={index} name="child_school" data-id={index} value={childrenData.child_school}   onChange = {e =>onChangeChild(e)}/>
+                            <input type="text"  data-id={index} name="child_school"  value={childrenData.child_school}   onChange = {e =>onChangeChild(e)}/>
                            </div>
                            <div  className="form-group">
                             <div className="form-label" >Children Contact</div>

@@ -1,4 +1,4 @@
-import React, { useEffect,Fragment,useState, Profiler }from 'react';
+import React, { useEffect,Fragment }from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -8,10 +8,9 @@ import DashboardActions from './DashboardActions';
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { faBullhorn} from '@fortawesome/free-solid-svg-icons';
-import { faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
+
 import { faFlag} from '@fortawesome/free-solid-svg-icons';
-import Button from '@material-ui/core/Button';
-import SaveIcon  from '@material-ui/icons/Save'
+
 
 
  const Dashboard = ({auth, profile,getCurrentProfile}) => {

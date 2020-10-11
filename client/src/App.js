@@ -10,13 +10,13 @@ import Dashboard from './components/dashboard/Dashboard';
 import Alert from './components/auth/Alert';
 import {loadUser} from './actions/auth';
 import Report from './components/report/Report';
-import DashboardActions from './components/dashboard/DashboardActions';
+
 import EditProfile from './components/profileforms/EditProfile';
 import Flag from './components/Flag/Flag';
 import AllProfile from './components/profile/AllProfile';
 import AllReport  from './components/report/AllReport';
 import ViewReport  from './components/report/ViewReport';
-import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 
 import setAuthToken from './utils/setauthtoken';
 

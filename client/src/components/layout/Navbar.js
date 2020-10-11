@@ -22,7 +22,7 @@ import logo from '../../img/logo1.PNG';
      (<nav className="navbar">
     <ul>
 
-      <li className="navbar-logo"> <Link to="/"> <img src={logo}/> </Link></li>
+      <li className="navbar-logo"> <Link to="/"> <img src={logo} alt='logo'/> </Link></li>
 
 
     </ul>
@@ -40,7 +40,7 @@ import logo from '../../img/logo1.PNG';
   (<nav className="navbar">
   <ul>
 
-  <li className="navbar-logo"> <Link to="/"> <img src={logo}/> </Link></li>
+  <li className="navbar-logo"> <Link to="/"> <img  alt='logo' src={logo}/> </Link></li>
 
   </ul>
 

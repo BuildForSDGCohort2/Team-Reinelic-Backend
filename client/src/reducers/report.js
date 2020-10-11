@@ -32,7 +32,8 @@ import { REPORT_SUCCESS,REPORT_FAIL ,ALL_REPORT_FAIL,ALL_REPORT_SUCCESS,CLEAR_RE
                 
             };
         case REPORT_FAIL:
-        case VIEW_REPORT_FAIL:    
+        case VIEW_REPORT_FAIL:
+        case ALL_REPORT_FAIL:        
             return{
                 ...state,
                 loading:false
