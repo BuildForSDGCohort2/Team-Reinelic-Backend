@@ -22,7 +22,7 @@ export const ViewReport =  ({report,getAReport,match}) => {
 
    useEffect(()=>{
        getAReport(match.params.report_id)
-   },[])
+   },[getAReport])
  
     
     

@@ -7,7 +7,7 @@ import{getAllProfile} from '../../actions/profile';
 import Spinner from '../layout/Spinner';
 
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
 import { faBullhorn} from '@fortawesome/free-solid-svg-icons';
 import { faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import { faFlag} from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +23,7 @@ export const AllProfile = ({getAllProfile,profile}) => {
     
     useEffect(()=>{
       getAllProfile()
-    },[]);
+    },[getAllProfile]);
     
     console.log(profile.profiles)
     

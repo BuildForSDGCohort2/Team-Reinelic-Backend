@@ -172,7 +172,7 @@ import {createProfile} from '../../actions/profile';
                            </div>
                             <div className="form-group">
                             <div className="form-label" >Children Age</div>
-                            <input type="text" data-id={index} name ="child_age" value={childrenData.child_age} data-id ={index} onChange = {e =>onChangeChild(e)}/>
+                            <input type="text"  name ="child_age" value={childrenData.child_age} data-id ={index} onChange = {e =>onChangeChild(e)}/>
                            </div>
                            <div className="form-group">
                             <div className="form-label" > Children School</div>
@@ -180,7 +180,7 @@ import {createProfile} from '../../actions/profile';
                            </div>
                            <div  className="form-group">
                             <div className="form-label" >Children Contact</div>
-                            <input type="text" data-id={index} name="child_contact" data-id={index}  value={childrenData.child_contact}  onChange = {e =>onChangeChild(e)}/>
+                            <input type="text" data-id={index} name="child_contact"  value={childrenData.child_contact}  onChange = {e =>onChangeChild(e)}/>
                            </div>
                            </Fragment>
 
