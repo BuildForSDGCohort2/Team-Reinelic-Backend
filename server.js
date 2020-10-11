@@ -6,6 +6,7 @@ const debug = require("debug")("app");
 const connectDB = require('./config/db');
 
 const app = express();
+const path = require('path');
 
 
 
@@ -17,7 +18,9 @@ connectDB();
 //MIDDLEWARES 
 
 app.use(morgan('tiny'));
-app.use(express.json({extended:false}));
+app.use(express.json({
+    extended: false
+}));
 
 
 
@@ -33,6 +36,18 @@ app.use('/api/profile', require('./api/profiles'));
 app.use('/api/report', require('./api/reports'));
 app.use('/api/auth', require('./api/auth'));
 
-const PORT = process.env.PORT || 3000;
+// SERVE STATIC ASSET
 
-app.listen(PORT, () => debug(`App is listening to  ${chalk.red(PORT)}`));
+if(process.env.NODE_ENV === "production"){
+
+    app.use(express.static('client/build'));
+
+    app.getMaxListeners('*',(req,res)=>{
+
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
+}
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log('App is listening'));

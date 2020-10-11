@@ -27,7 +27,7 @@ router.post('/', [
     check('password', 'password is required').isLength({
         min: 6
     }),
-    check('category', 'Your category either parent , educator or children is required').not().isEmpty(),
+    
     check('email', 'Please include a valid email').isEmail()
 
 ], async (req, res) => {
@@ -40,8 +40,7 @@ router.post('/', [
         })
     }
     const {
-        name,
-        category,
+        name,   
         email,
         password
     } = req.body;
@@ -62,7 +61,6 @@ router.post('/', [
 
         user = new User({
             name,
-            category,
             email,
             password
         })
@@ -95,6 +93,7 @@ router.post('/', [
         )
 
     } catch (error) {
+        console.error(error);
         res.status(500).send("Server error")
     }
 })

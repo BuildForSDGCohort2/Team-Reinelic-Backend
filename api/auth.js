@@ -22,7 +22,7 @@ const User = require('../models/User');
 
 router.get('/', auth, async (req, res) => {
 
-    console.log(req.user.id);
+    // console.log(req.user.id);
 
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -89,9 +89,7 @@ router.post('/', [
         }
         jwt.sign(
             payload,
-            config.get('jwtToken'), {
-                expiresIn: 36000
-            },
+            config.get('jwtToken'),
             (err, token) => {
                 if (err) throw err;
                 res.json({

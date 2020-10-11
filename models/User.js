@@ -19,10 +19,6 @@ const userSchema = new mongoose.Schema({
         required: true
     },
 
-    category: {
-        type: String,
-        required: true
-    },
     photo: {
         type: String
     },
