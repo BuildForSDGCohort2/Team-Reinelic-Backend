@@ -31,6 +31,8 @@ export const reportData =(formdata,history) => async dispatch =>{
             type:REPORT_SUCCESS,
             payload:res.data
         })
+
+        history.push('/dashboard');
        
     
         // if(!edit){

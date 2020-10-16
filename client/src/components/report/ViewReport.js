@@ -53,7 +53,7 @@ export const ViewReport =  ({report,getAReport,match}) => {
                 <div> Report Type: {report.report &&report.report_type}</div>
                 <div> Report Description : {report.report &&report.description}</div>
                 <div> Report Location : {report.report &&report.report.location}</div>
-                <div className ="text-lead"> Report Investtigation status</div> 
+                <div className ="text-lead"> Report Investigation status</div> 
                {report.report&&report.report.investigation.map(child => 
                <div class ='investigation_status'>
                    <div>Report status : {child.status}</div>
@@ -67,7 +67,7 @@ export const ViewReport =  ({report,getAReport,match}) => {
                </div>   
                )}
 
-               <Button 
+               {/* <Button 
                startIcon={<SaveIcon/>}
                href=""
                 variant="contained" 
@@ -77,7 +77,7 @@ export const ViewReport =  ({report,getAReport,match}) => {
                }}
                >
                    Edit Profile
-               </Button> 
+               </Button>  */}
 
         
 

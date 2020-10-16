@@ -57,7 +57,7 @@ import { faFlag} from '@fortawesome/free-solid-svg-icons';
                 
 
                 {
-                profile.profile.name && profile.loading === false ?(
+                profile.profile && profile.loading === false ?(
                     <Fragment> < DashboardActions /> </Fragment>
                 ):(
                     <Fragment> 
@@ -71,8 +71,9 @@ import { faFlag} from '@fortawesome/free-solid-svg-icons';
  
 
             </div>
-
-
+         
+         { profile.profile ?(
+           
             <div className="dashboard-body--report">
 
                 <h3> User Profile  <FontAwesomeIcon icon={faCoffee} /> </h3>
@@ -80,7 +81,7 @@ import { faFlag} from '@fortawesome/free-solid-svg-icons';
                 <div className ="text-lead"> Parent Name : {profile.profile &&profile.profile.user.name}</div>
                 <div> Parent contact: {profile.profile &&profile.profile.contact}</div>
                 <div> Parent category : {profile.profile &&profile.profile.work}</div>
-                <div> Parent availability : {profile.profile &&profile.profile.availability}</div>
+                <div> Parent availability : {profile.profile &&profile.profile.available}</div>
                 <div className ="text-lead"> Mtoto profile</div> 
                {profile.profile&&profile.profile.children.map(child => 
                <div class ='mtoto'>
@@ -99,9 +100,9 @@ import { faFlag} from '@fortawesome/free-solid-svg-icons';
 
           
 
-            </div>
+            </div>): <div> </div>
 
-            
+               }
 
 
 

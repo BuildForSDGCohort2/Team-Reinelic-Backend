@@ -66,16 +66,23 @@ router.post('/', [
         });
 
         if (!user) {
-            res.status(400).json({
+           return res.status(400).send({
                 errors: [{
                     msg: "Invalid credentials"
                 }]
             })
         }
+   
 
+        // if (user) {
+        //     return res.status(400).json({
+        //         errors: [{
+        //             msg: 'User already exists'
+        //         }]
+        //     })
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({
+            return res.status(400).send({
                 errors: [{
                     msg: "Invalid credentials"
                 }]
@@ -92,6 +99,7 @@ router.post('/', [
             config.get('jwtToken'),
             (err, token) => {
                 if (err) throw err;
+                console.log('Token created' , token)
                 res.json({
                     token
                 })

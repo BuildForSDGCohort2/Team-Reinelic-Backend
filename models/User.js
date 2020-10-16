@@ -19,9 +19,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
 
-    photo: {
-        type: String
-    },
+    
 
     date: {
         type: Date,

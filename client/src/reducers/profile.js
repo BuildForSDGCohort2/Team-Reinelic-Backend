@@ -1,9 +1,10 @@
 
-import {GET_PROFILE, PROFILE_ERROR,CLEAR_PROFILE,ALL_PROFILE_SUCCESS,ALL_PROFILE_FAIL } from '../actions/types';
+import {GET_PROFILE, PROFILE_ERROR,CLEAR_PROFILE,ALL_PROFILE_SUCCESS,ALL_PROFILE_FAIL,VIEW_APROFILE_SUCCESS,VIEW_APROFILE_FAIL } from '../actions/types';
 
  const initialState ={
     profile:null,
     profiles :[],
+    view:null,
     loading:true,
     errors : {}
  }
@@ -22,7 +23,8 @@ import {GET_PROFILE, PROFILE_ERROR,CLEAR_PROFILE,ALL_PROFILE_SUCCESS,ALL_PROFILE
                 loading:false
             };
         case PROFILE_ERROR:
-        case ALL_PROFILE_FAIL:    
+        case ALL_PROFILE_FAIL:
+        case VIEW_APROFILE_FAIL:        
             return{
                 ...state,
                 error:payload,
@@ -43,8 +45,13 @@ import {GET_PROFILE, PROFILE_ERROR,CLEAR_PROFILE,ALL_PROFILE_SUCCESS,ALL_PROFILE
                  ...state,
                  profiles:payload,
                  loading:false
-             }
-        
+             };
+        case VIEW_APROFILE_SUCCESS:
+           return {
+                ...state,
+                view:payload
+            };
+
          default:
             return state;    
     

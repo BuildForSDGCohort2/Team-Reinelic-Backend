@@ -16,6 +16,7 @@ import Flag from './components/Flag/Flag';
 import AllProfile from './components/profile/AllProfile';
 import AllReport  from './components/report/AllReport';
 import ViewReport  from './components/report/ViewReport';
+import ViewProfile from './components/profile/ViewProfile';
 
 
 import setAuthToken from './utils/setauthtoken';
@@ -55,6 +56,8 @@ const App = () =>{
       <PrivateRoute exact path="/edit-profile" component ={EditProfile} />
       <PrivateRoute exact path="/report" component ={AllReport} />
       <PrivateRoute exact path="/report/:report_id" component ={ViewReport} />
+      <PrivateRoute exact path="/profile/:profile_id" component ={ViewProfile} />
+
       
    
      </Switch>    

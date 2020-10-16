@@ -51,14 +51,15 @@ export const AllProfile = ({getAllProfile,profile}) => {
                     profile.profiles&&profile.profiles.map(profile =>
                      <div>   
                     <div> Name: {profile.name}</div>
-                    <img src={avatar} alt=""/>
-                    <div> Availability: {profile.availability}</div>
+                    <img className ='img-profile' src={`/upload/${profile.picture}`} alt=""/>
+                    <div> Availability: {profile.available}</div>
+                    <div><Link to= {`/profile/${profile._id}`} >View Profile</Link></div>
                     </div>
                         )
-
+                       
 
                 }
-
+         
 
 {/* 
                {profile.profile&&profile.profile.children.map(child => 

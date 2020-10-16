@@ -52,11 +52,15 @@ const profileSchema = new mongoose.Schema({
         type:String,
         default:'One'
     },
-    availability:{
+    available:{
 
         type:String,
-        default:true
-    }
+        
+    },
+    picture:{
+        type:String,
+        
+    },
 
 
 })

@@ -104,8 +104,10 @@ export const login =(email, password) => async dispatch =>{
         
     } catch (err) {
 
-        console.log(err);
-        const errors = err.res.data.errors;
+        console.log(err.response);
+        
+        const errors = err.response.data.errors;
+        console.log(errors)
 
         if(errors){
             errors.forEach(error => dispatch(setAlert(error.msg)))
@@ -122,7 +124,11 @@ export const login =(email, password) => async dispatch =>{
 export const logout= () => {
     return async (dispatch) => {
 
+        if(localStorage.token){
 
+            setAuthToken(localStorage.token)
+
+    }
 
         try {
 

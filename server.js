@@ -2,6 +2,7 @@ const express = require("express");
 const chalk = require("chalk");
 const morgan = require("morgan");
 const debug = require("debug")("app");
+const fileUpload = require('express-fileupload')
 
 const connectDB = require('./config/db');
 
@@ -16,11 +17,15 @@ const path = require('path');
 connectDB();
 
 //MIDDLEWARES 
-
+// app.use(fileUpload(
+// {
+//     debug:true
+// }))
 app.use(morgan('tiny'));
 app.use(express.json({
     extended: false
 }));
+
 
 
 

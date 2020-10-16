@@ -8,7 +8,7 @@ import  PropTypes from 'prop-types';
 
 
 
-export const Report = ({ profile,reportData,report,getAllProfile}) => {
+export const Report = ({ profile,reportData,report,getAllProfile,history}) => {
 
 
     useEffect(()=>{
@@ -49,7 +49,7 @@ export const Report = ({ profile,reportData,report,getAllProfile}) => {
 
     e.preventDefault();
 
-    reportData(formData)
+    reportData(formData,history)
 
     
  }

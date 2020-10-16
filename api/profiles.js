@@ -7,7 +7,15 @@ const {
 } = require('express-validator');
 const request = require('request');
 const config = require('config');
+const fileUpload = require('express-fileupload');
+const path = require('path');
+// const multer = require('multer');
+// const upload = multer({dest :'upload/'})
 
+router.use(fileUpload(
+    {
+        debug:true
+    }))
 
 
 
@@ -24,7 +32,8 @@ router.get("/me",auth,  async (req, res) => {
 
         try {
             
-          
+            console.log('Getting my profile',req.user.id);
+            
             const profile = await (Profile.findOne({
                 user: req.user.id
             })).populate("user", ["name"]).populate("children");
@@ -53,7 +62,47 @@ router.get("/me",auth,  async (req, res) => {
 // @desc  Create or update user profile
 // @access Private
 
-router.post("/", [auth,
+router.post('/photo',auth,async(req,res) =>{
+
+   const file = req.files.file;
+
+
+   const profile = await (Profile.findOne({
+    user: req.user.id
+})).populate("picture");
+
+
+ console.log('profile',profile)
+  let photoPath = path.join(__dirname,`../client/public/upload/${file.name}`);
+  let sendPath =file.name
+
+  try {
+
+    profile.picture = sendPath;
+    await profile.save()
+      
+  } catch (error) {
+     console.error(error) 
+  }
+ 
+  console.log(photoPath)
+
+   file.mv(`${photoPath}`,err =>{
+       if(err){
+           console.error(err);
+           return res.status(500).send(err);
+       }
+    //    profile.picture = newPath;
+
+    //    console.log(profile);
+     
+       res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+   })
+
+})
+
+
+router.post("/", [auth
     //     [
     //         check("children_name", "You must be a parent or tutor").not().isEmpty(),
     //         check("location", "You must enter your location").not().isEmpty(),
@@ -72,18 +121,41 @@ router.post("/", [auth,
         // }
 
         const {
-            name,
+           name,
             category,
             work,
             address,
             contact,     
             children,
+            available,
+            
+            
             ...formdata
-        } = req.body.formdata;
+        } = req.body;
 
-        console.log(req.body)
+       console.log('I have also hit the second route')
+     
+      
+   
 
-        console.log(formdata)
+
+
+        // photo.mv(`${__dirname}/client/public/${photo.name}`, err =>{
+        //     if(err){
+        //         console.error(err);
+        //         return res.status(500)
+        //     }
+
+        //     res.json({
+        //         fileName:photo.name,
+        //         filePath:`uploads/${file.name}`
+        //     })
+        // })
+
+      
+       
+
+      
 
         //build a profile field for more organisation
 
@@ -93,8 +165,11 @@ router.post("/", [auth,
         if (name) profilefields.name = name;
         if (category) profilefields.category = category;
         if (work) profilefields.work = work;
-        if (address) profilefields.work = work;
+        if (address) profilefields.address = work;
         if (contact) profilefields.contact = contact;
+        if (available) profilefields.available = available;
+
+       
        
        
       
@@ -230,6 +305,37 @@ router.delete('/', auth, async (req, res) => {
 
 
 })
+
+
+
+// @route GET api/profile/:profile_if
+// @desc Get profile by userId
+// @access Public
+
+
+router.get('/:profile_id', async (req, res) => {
+    try {
+
+        console.log(req.body)
+        const profile = await Profile.findById({
+             _id:req.params.profile_id
+        })
+
+        if (!profile) {
+            return res.status(400).json({
+                msg: 'There is no profile set up for this account'
+            })
+        }
+
+        res.json(profile);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server error")
+    }
+
+
+})
+
 
 
 

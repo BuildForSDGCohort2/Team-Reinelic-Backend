@@ -3,13 +3,16 @@ import {withRouter} from 'react-router-dom';
 import {connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {createProfile} from '../../actions/profile';
+import avatar from '../../img/avatar.png';
+import {loadUser} from '../../actions/auth';
 
 
 
 
 
 
- const ProfileMain = ({createProfile,history}) => {
+
+ const ProfileMain = ({auth,createProfile,history}) => {
 
     const [formData,setFormData] =useState(
         {
@@ -17,13 +20,33 @@ import {createProfile} from '../../actions/profile';
             category:'',
             work:'',
             address:'',
-            contact:'',     
+            contact:'',  
+            available:'' ,
+            photo:'',
             children :[],
             childNum:0
         }
     );
+    
+
+    const [file,setFile] = useState('')
   
-    const {name, category, work, address,contact} = formData;
+    const {name, category, work, address,contact,available} = formData;
+
+    let photoData ='' ;
+
+    const onChangePhoto =(e) =>{
+        e.preventDefault();
+        // setFile(e.target.files[0])
+         setFile( e.target.files[0])
+     
+     
+
+     console.log(Array.from(photoData))
+
+     
+        
+    }
    
 
     const[childrenData, setChildren] = useState(
@@ -64,8 +87,37 @@ import {createProfile} from '../../actions/profile';
 
     const onSubmit = (e) =>{
         e.preventDefault();
-      
-        createProfile(formData,history);
+       
+        photoData = new FormData();
+        photoData.append('file',file);
+        // photoData.append('formData',formData);
+       
+
+    // for(var property in formData){
+         
+    //     if( typeof formData[property] ==='object'){
+         
+    //     console.log('I am inside the array')
+    //             formData[property].forEach(elt =>{
+    //               for(var prop in elt){
+    //                   console.log(prop,elt[prop])
+    //                   photoData.append(prop, elt[prop])
+                    
+    //               }
+    //             })
+    //     }
+        
+    //     console.log(typeof formData[property])
+
+    //     photoData.append(property, formData[property])
+
+    // }
+
+    // console.log(Array.from(photoData));
+
+     
+        createProfile(formData,photoData);
+        
     }
 
     const addChildren  = async(e) =>{
@@ -104,7 +156,7 @@ import {createProfile} from '../../actions/profile';
 
             <div className=" profile-main-picture p-2">
 
-                <img src="../img/profile-img.jpg" alt=""/>
+                <img src={avatar} alt=""/>
             </div>
 
             <div className="profile-main-about p-2">
@@ -140,8 +192,13 @@ import {createProfile} from '../../actions/profile';
                         <input type="text" name ="name" onChange={e => onChange(e)}/>
                     </div>
                     <div className="form-group">
-                        <div className="form-label"> Category </div>
-                        <input type="text" name="category" value ={category}  onChange = {e =>onChange(e)}/>
+                        <div className="form-label"   > Category </div>
+                        <select name="category" id="categories" onChange = {e =>onChange(e)}  >
+                        <option value="Father">Father</option>
+                        <option value="Mother">Mother</option>
+                        <option value="Tutor">Tutor</option>                   
+                        </select>
+
                     </div>
                     <div className="form-group">
                         <div className="form-label" > Address</div>
@@ -155,6 +212,19 @@ import {createProfile} from '../../actions/profile';
                         <div className="form-label" > Contact</div>
                         <input type="text" name="contact" value ={contact} onChange = {e =>onChange(e)}/>
                     </div>
+                    <div  className="form-group">
+                    <div className ="form-label"> Are you available as a committee member? </div>
+                    <input type="radio"  name="available" value="available" onChange = {e =>onChange(e)} />
+                    <label for="yes">Yes</label><br />
+                    <input type="radio"  name="Unavailable" value="Unavailable" onChange = {e =>onChange(e)} />
+                    <label for="no">No</label><br />
+                    </div>
+                    <div className="form-group">
+                        <div className="form-label"> Work</div>
+                        <input type="file" name="file"  onChange = {e =>onChangePhoto(e)}/>
+                    </div>
+
+
                      <button onClick = {(e) => addChildren(e)} > Add a children</button>
                     <Fragment>
 
@@ -223,9 +293,16 @@ import {createProfile} from '../../actions/profile';
 ProfileMain.propTypes = {
 
     createProfile: PropTypes.func.isRequired,
+    auth:PropTypes.object.isRequired
+
+    
 }
 
+const mapStateToProps =(state) =>({
+
+    auth:state.auth
+
+})
 
 
-
-export default connect(null,{createProfile}) (withRouter(ProfileMain));
+export default connect(mapStateToProps,{createProfile,loadUser}) (withRouter(ProfileMain));

@@ -6,6 +6,8 @@ module.exports = function (req, res, next) {
  
     
     const token = req.header('x-auth-token');
+    
+    console.log('Inside the header token',token)
    
     
 
