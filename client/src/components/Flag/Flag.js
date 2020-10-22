@@ -67,19 +67,19 @@ export const Flag = () => {
                     <div className="form-body">
                
                         <div className="form-group">
-                            <div className="form-label"  > Type of abuse</div>
+                            <div className="form-label"  > Type of Place</div>
                             <select name="report_type" value ={report_type} onChange={e => onChange(e)} >
                                 <option value="0">Select the type</option>
-                                    <option value="Child Work">Child Work</option>
-                                    <option value="Physical Molestation">Physical Molestation</option>
-                                    <option value="Sexual Abuse">Sexual Abuse</option>
-                                    <option value="Child trafficking">Child trafficking</option>
+                                    <option value="Child Work">Business Store </option>
+                                    <option value="Physical Molestation">School</option>
+                                    <option value="Sexual Abuse">Community Place</option>
+                                    <option value="Child trafficking">Bar,NightClub</option>
                                     <option value="Behaviour influence">Behaviour influence</option>
                             </select>
                         </div>
 
                         <div className="form-group">
-                            <div className="form-label"> Description of abuse</div>
+                            <div className="form-label"> Describe the flag</div>
                             <textarea  name="description" value={description} rows="4" cols="50" onChange = {e =>onChange(e)} ></textarea>
                         
                         </div>
@@ -95,7 +95,7 @@ export const Flag = () => {
                         </div>
                        
                         <div className="form-group">
-                        <button>REPORT</button>
+                        <button>FLAG</button>
                      </div>
                         </div>
 

@@ -1,7 +1,7 @@
 import React,{ Fragment }from 'react';
 // import axios from 'axios';
 import {connect} from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {logout} from '../../actions/auth';
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -13,7 +13,7 @@ import logo from '../../img/logo1.PNG';
 
 
 
- const Navbar = ({auth, logout}) => {
+ const Navbar = ({auth, logout,history}) => {
    
   const isAuth = auth.isAuthenticated;
 
@@ -77,4 +77,4 @@ const mapStateToProps =(state)=>{
 }
 
 
-export default connect(mapStateToProps,{logout}) (Navbar);
+export default connect(mapStateToProps,{logout}) (withRouter(Navbar));

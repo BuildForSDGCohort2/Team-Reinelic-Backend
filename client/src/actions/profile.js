@@ -18,13 +18,14 @@ export const getCurrentProfile =()=>async dispatch =>{
         })
         
     } catch (err) {
-        console.log(err)
+        console.log(err.response)
+     
         dispatch({
             type:PROFILE_ERROR,
             payload :{ msg:err.response.statusText , status:err.response.status}
 
         })
-
+   return;
         
     }
  
@@ -35,10 +36,11 @@ export const getCurrentProfile =()=>async dispatch =>{
 }
 
 
-export const createProfile = ( formData,photoData,edit =false,history )=> async dispatch =>{
+export const createProfile = ( formData,edit,history,photoData )=> async dispatch =>{
 
 
-console.log('I am in the action see photo ',photoData)
+    console.log('Arguments',edit)
+console.log('History', history)
 
 const configF ={
         headers:{
@@ -60,9 +62,9 @@ const config ={
 
 
 const res = await axios.post('/api/profile',body,config);
-
+if(edit == false){
 const resp = await   axios.post('/api/profile/photo',photoData,configF);
-
+}
         // const res = await axios.all([
         //     axios.post('/api/profile',body,config),
         //     axios.post('/api/profile/photo',photoData),   
@@ -73,11 +75,9 @@ const resp = await   axios.post('/api/profile/photo',photoData,configF);
             payload:res.data
         })
 
-        dispatch(setAlert(edit? 'Profile Updated': 'Profile Created'));
-        if(!edit){
+        // dispatch(setAlert(edit? 'Profile Updated': 'Profile Created'));
 
-            history.push('/dashboard')
-        }
+        history.push('/dashboard')
         
     } catch (err) {
 
@@ -110,6 +110,7 @@ export const getAllProfile =()=>async dispatch =>{
       
         
     } catch (err) {
+        
         dispatch({
             type:PROFILE_ERROR,
             payload :{ msg:err.response.statusText , status:err.response.status}

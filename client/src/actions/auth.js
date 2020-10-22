@@ -121,14 +121,14 @@ export const login =(email, password) => async dispatch =>{
 
 
 
-export const logout= () => {
+export const logout= (history) => {
     return async (dispatch) => {
 
-        if(localStorage.token){
+    //     if(localStorage.token){
 
-            setAuthToken(localStorage.token)
+    //         setAuthToken(localStorage.token)
 
-    }
+    // }
 
         try {
 
@@ -144,7 +144,7 @@ export const logout= () => {
                 type:CLEAR_REPORT
             })
 
-         
+        history.push('/dashboard')   
 
         } catch (error) {
             console.error(error);

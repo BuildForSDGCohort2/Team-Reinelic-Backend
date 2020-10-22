@@ -28,25 +28,30 @@ const Profile = require('../models/Profile');
 // @desc Get current user profile
 // @access Public
 
-router.get("/me",auth,  async (req, res) => {
+router.get("/me",auth,  async(req, res) => {
+
+    console.log('in my profile route')
 
         try {
             
             console.log('Getting my profile',req.user.id);
             
-            const profile = await (Profile.findOne({
+            const profile = await(Profile.findOne({
                 user: req.user.id
             })).populate("user", ["name"]).populate("children");
+
+           
+            console.log("This is the profile ", profile)
 
             console.log(profile)
 
             if (!profile) {
-                res.status(400).json({
+               return res.status(400).json({
                     msg: "There is no profile for this user"
                 });
             }
 
-            res.json(profile)
+           return res.json(profile)
         } catch (error) {
 
     
@@ -189,7 +194,7 @@ router.post("/", [auth
                 });
 
                 console.log('child object')
-                console.log(child)
+               
 
                 children.forEach((child) => {
                     profile.children.push(child)
@@ -198,6 +203,7 @@ router.post("/", [auth
                
 
                 await profile.save();
+                console.log(profile)
 
                 return res.json(profile);
 

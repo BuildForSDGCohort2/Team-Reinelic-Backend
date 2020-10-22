@@ -94,7 +94,9 @@ router.post('/', [
                 id: user.id,
             }
         }
-        jwt.sign(
+
+        console.log('USER' , payload.user)
+        await jwt.sign(
             payload,
             config.get('jwtToken'),
             (err, token) => {

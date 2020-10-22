@@ -4,7 +4,7 @@ const config = require('config');
 
 module.exports = function (req, res, next) {
  
-    
+    console.log("Request in auth middleware")
     const token = req.header('x-auth-token');
     
     console.log('Inside the header token',token)
@@ -26,5 +26,6 @@ module.exports = function (req, res, next) {
 
     } catch (error) {
         console.error('Server error')
+        throw error;
     }
 }

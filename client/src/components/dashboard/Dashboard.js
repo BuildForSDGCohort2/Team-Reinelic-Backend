@@ -3,17 +3,19 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import{getCurrentProfile} from '../../actions/profile';
+import {loadUser} from '../../actions/auth';
 import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faRoad } from '@fortawesome/free-solid-svg-icons';
 import { faBullhorn} from '@fortawesome/free-solid-svg-icons';
+import { DashboardIcons} from './DashboardIcons';
 
 import { faFlag} from '@fortawesome/free-solid-svg-icons';
 
 
 
- const Dashboard = ({auth, profile,getCurrentProfile}) => {
+ const Dashboard = ({auth, profile,getCurrentProfile,loadUser}) => {
 
   
 
@@ -22,30 +24,25 @@ import { faFlag} from '@fortawesome/free-solid-svg-icons';
    console.log(auth);
 
     useEffect(()=>{
+        loadUser();
         getCurrentProfile();
+       
 
        
         
-    },[profile.loading])
+    },[auth.isAuthenticated])
 
    
 
   
 
     return (
-         profile.profile ===null && profile.loading===true?
+          auth.user===null?
          <Spinner/>:
           <Fragment>  
    
         <section className="dashboard">
-            <div className="dashboard-icons">
-                <ul>
-                    <li>  <Link to ='/create-report' >Create a New Report</Link> </li> 
-                    <li>   <FontAwesomeIcon icon={faFlag} />  <Link to ='/edit-profile' > Flag</Link></li>
-                    <li> <FontAwesomeIcon icon={faBullhorn} /> <Link to ='/edit-profile' > Alert</Link></li>  
-                    <li> <FontAwesomeIcon icon={faBullhorn} /> <Link to ='/edit-profile' > </Link></li>  
-                </ul>
-            </div>
+             <DashboardIcons />
 
             <div className="dashboard-body">
             <div className="dashboard-body--profile">
@@ -122,12 +119,14 @@ Dashboard.propTypes ={
     getCurrentProfile:PropTypes.func.isRequired,
     auth:PropTypes.object.isRequired,
     profile:PropTypes.object.isRequired,
+    loadUser: PropTypes.object.isRequired
 }
 const mapStateToProps =(state)=>{
     return{
         auth:state.auth,
-        profile:state.profile
+        profile:state.profile,
+        
     }
 }
 
-export default connect(mapStateToProps,{getCurrentProfile}) (Dashboard);
+export default connect(mapStateToProps,{getCurrentProfile,loadUser}) (Dashboard);

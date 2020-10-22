@@ -115,8 +115,8 @@ import {loadUser} from '../../actions/auth';
 
     // console.log(Array.from(photoData));
 
-     
-        createProfile(formData,photoData);
+       const edit = false;
+        createProfile(formData,edit,history,photoData);
         
     }
 
@@ -160,8 +160,8 @@ import {loadUser} from '../../actions/auth';
             </div>
 
             <div className="profile-main-about p-2">
-                <p>Jeremy Rose</p>
-                <p>Work: Business Owner</p>
+    <p> Hello, {auth.name&&auth.user.name}</p>
+               
 
                 <div className="my-3">
                     <span >ABOUT</span>
@@ -306,3 +306,5 @@ const mapStateToProps =(state) =>({
 
 
 export default connect(mapStateToProps,{createProfile,loadUser}) (withRouter(ProfileMain));
+
+// export default connect(mapStateToProps,{createProfile,getCurrentProfile}) (withRouter(EditProfile));

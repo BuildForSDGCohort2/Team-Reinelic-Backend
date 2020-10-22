@@ -35,15 +35,31 @@ export const EditProfile = ({profile:{profile,loading},createProfile,getCurrentP
       
       );
       let userProfile;
+      const [file,setFile] = useState('');
+      let photoData ='' ;
+
+      const onChangePhoto =(e) =>{
+          e.preventDefault();
+          // setFile(e.target.files[0])
+           setFile( e.target.files[0])
+       
+       
+  
+       console.log(Array.from(photoData))
+  
+       
+          
+      }
 
       useEffect(()=>{
           getCurrentProfile();
           userProfile = profile
 
-          let userChildren = userProfile.children
-
+          let userChildren = userProfile&&userProfile.children
+        
+          if(userChildren){
           setChildren([...userChildren])
-
+          }
           console.log('ChildrenData',childrenData)
          
          
@@ -62,7 +78,7 @@ export const EditProfile = ({profile:{profile,loading},createProfile,getCurrentP
         
       },[getCurrentProfile])
 
-
+      let image = profile&&profile.picture;
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
     const onChangeChild =(e) => {
@@ -95,9 +111,13 @@ export const EditProfile = ({profile:{profile,loading},createProfile,getCurrentP
 
     const onSubmit = (e) =>{
         e.preventDefault();
-      
-        // createProfile(formData,history);
+        photoData = new FormData();
+        photoData.append('file',file);
+        const edit = true;
+        createProfile(formData,edit,history,photoData);
     }
+
+
     let child = 0
     const addChildren  = (e) =>{
         e.preventDefault(e);
@@ -181,6 +201,10 @@ export const EditProfile = ({profile:{profile,loading},createProfile,getCurrentP
                         <div className="form-label" > Contact</div>
                         <input type="text" name="contact" value ={contact} onChange = {e =>onChange(e)}/>
                     </div>
+                    <div className="form-group">
+                        <div className="form-label"> Work</div>
+                        <input type="file" name="file"  onChange = {e =>onChangePhoto(e)}/>
+                    </div>
                      <button onClick = {(e) => addChildren(e)} > Add a children</button>
                     <Fragment>
 
@@ -205,7 +229,7 @@ export const EditProfile = ({profile:{profile,loading},createProfile,getCurrentP
                            </div>
                            <div  className="form-group">
                             <div className="form-label" >Children Contact</div>
-                            <input type="text" name="child_contact" data-id ={index}  value={childrenData[index].child_school}   onChange = {e =>onChangeChild(e)}/>
+                            <input type="text" name="child_contact" data-id ={index}  value={childrenData[index].child_contact}   onChange = {e =>onChangeChild(e)}/>
                            </div>
                            </Fragment>
 
